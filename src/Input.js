@@ -12,8 +12,11 @@ export default class Input extends React.Component {
     // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+
+
   handleChange = event => {
   //  handleChange (event) {
+
     const value = event.target.value;
     console.log(value);
     if (/(^$|\d+$)/.test(value)) {
@@ -37,12 +40,12 @@ export default class Input extends React.Component {
           <label>
             <input
               type="text"
+              placeholder="Enter a number here"
               value={this.state.value}
               onChange={this.handleChange}
             />
           </label>
-          <input type="submit" value="Submit" />
-          {/* <button>Submit</button> */}
+          <input type="submit" value="Add" onClick={this.handleSubmit}/>
         </form>
       </div>
 
