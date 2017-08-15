@@ -7,48 +7,45 @@ export default class Input extends React.Component {
       sum: 0,
       value: ''
     };
-
-    // this.handleChange = this.handleChange.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-
+  handleSubmit = event => {
+    event.preventDefault();
+    const sum = this.state.value + this.state.sum;
+    this.setState({sum});
+    this.setState({value: ''});
+  }
 
   handleChange = event => {
-  //  handleChange (event) {
-
     const value = event.target.value;
-    console.log(value);
     if (/(^$|\d+$)/.test(value)) {
       this.setState({value: parseInt(value, 10) || ''});
     }
   }
 
-  handleSubmit = event => {
-    //console.log('Submit triggered!');
-    const sum = this.state.value + this.state.sum;
-    this.setState({sum});
-    this.setState({value: ''});
-    event.preventDefault();
-  }
-
   render () {
+    const { sum, value } = this.state;
+
     return (
       <div className="App">
-        <h1>{this.state.sum < 1000000000000 ? this.state.sum : 'Oh Snap!'}</h1>
+        <h1>{sum < 1000000000000 ? sum : 'You\'ve got a huge number!'}</h1>
         <form onSubmit={this.handleSubmit}>
           <label>
             <input
               type="text"
               placeholder="Enter a number here"
-              value={this.state.value}
+              value={value}
               onChange={this.handleChange}
             />
           </label>
-          <input type="submit" value="Add" onClick={this.handleSubmit}/>
+          <button
+            type="submit"
+            onClick={this.handleSubmit}
+            disabled={!value}>
+            Add
+          </button>
         </form>
       </div>
-
     );
   }
 }
