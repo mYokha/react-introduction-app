@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default class Input extends React.Component {
+export default class Input extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,11 +24,11 @@ export default class Input extends React.Component {
   }
 
   render () {
-    const { sum, value } = this.state;
+    const { sum, value, id } = this.props.counter;
 
     return (
       <div className="App">
-        <h1>{sum < 1000000000000 ? sum : 'You\'ve got a huge number!'}</h1>
+        <h2>{sum < 1000000000000 ? sum : 'You\'ve got a huge number!'}</h2>
         <form onSubmit={this.handleSubmit}>
           <label>
             <input
