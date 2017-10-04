@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import Prompt from './Prompt';
 import Counter from './Counter';
-import Input from './Input';
+//import Input from './Input';
 
 import './App.css';
 
@@ -10,7 +11,7 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      counter: {
+      prompt: {
         value: '',
         active: true
       },
@@ -18,19 +19,19 @@ export default class App extends Component {
     }
   }
 
-  handleCounterInput = event => {
+  handlePromptInput = event => {
     let value = event.target.value;
 
     if (/(^$|\d+$)/.test(value)) {
       value = parseInt(value, 10) || '';
-      const counter = Object.assign({}, this.state.counter, {value});
-      this.setState({counter});
+      const prompt = Object.assign({}, this.state.prompt, {value});
+      this.setState({prompt});
     }
   }
 
-  populateInputs = () => {
-    const counter = Object.assign({}, this.state.counter, {active: false});
-    const quantity = this.state.counter.value;
+  populateCounters = () => {
+    const prompt = Object.assign({}, this.state.prompt, {active: false});
+    const quantity = this.state.prompt.value;
     console.log(quantity);
     const counters = [];
     for (let i = 0; i < quantity; i++) {
@@ -41,7 +42,7 @@ export default class App extends Component {
       });
     }
     this.setState({
-      counter,
+      prompt,
       counters
     });
   }
@@ -50,20 +51,20 @@ export default class App extends Component {
     return (
         <div>
           {
-            this.state.counter.active &&
-            <Counter
-              value={this.state.counter.value}
-              handleInput={this.handleCounterInput}
-              populateInputs={this.populateInputs}
+            this.state.prompt.active &&
+            <Prompt
+              value={this.state.prompt.value}
+              handleInput={this.handlePromptInput}
+              populateCounters={this.populateCounters}
             />
           }
           {
             this.state.counters.length &&
             this.state.counters.map(item => {
               return (
-                <Input
+                <Counter
                   key={item.id}
-                  counter={item}
+                  prompt={item}
                 />
               );
             })
