@@ -1,18 +1,29 @@
 import React, { Component } from 'react';
 
-export default class Prompt extends Component{
+export default class Prompt extends Component {
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      value: ''
+    }
+  }
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.populateCounters();
+    this.props.populateCounters(this.state.value);
   }
 
   handleChange = event => {
-    this.props.handleInput(event);
+    let value = event.target.value;
+
+    if (/(^$|\d+$)/.test(value)) {
+      value = parseInt(value, 10) || '';
+      this.setState({value});
+    }
   }
 
   render () {
-    const value = this.props.value;
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -20,7 +31,7 @@ export default class Prompt extends Component{
             <input
               type="text"
               placeholder="Amount of boxes"
-              value={value}
+              value={this.state.value}
               onChange={this.handleChange}
             />
           </label>
