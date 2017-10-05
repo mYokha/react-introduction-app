@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default class Input extends React.Component {
+export default class Counter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sum: 0,
-      value: ''
+      value: '',
+      sum: 0
     };
   }
 
   handleSubmit = event => {
     event.preventDefault();
     const sum = this.state.value + this.state.sum;
-    this.setState({sum});
-    this.setState({value: ''});
+    this.setState({
+      sum,
+      value: ''
+    });
   }
 
   handleChange = event => {
@@ -24,24 +26,23 @@ export default class Input extends React.Component {
   }
 
   render () {
-    const { sum, value } = this.state;
+    const { sum } = this.state;
 
     return (
       <div className="App">
-        <h1>{sum < 1000000000000 ? sum : 'You\'ve got a huge number!'}</h1>
+        <h2>{sum < 1000000000000 ? sum : 'You\'ve got a huge number!'}</h2>
         <form onSubmit={this.handleSubmit}>
           <label>
             <input
               type="text"
               placeholder="Enter a number here"
-              value={value}
+              value={this.state.value}
               onChange={this.handleChange}
             />
           </label>
           <button
             type="submit"
-            onClick={this.handleSubmit}
-            disabled={!value}>
+          >
             Add
           </button>
         </form>
