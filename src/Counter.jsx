@@ -1,32 +1,33 @@
 import React, { Component } from 'react';
+import { extendObservable } from "mobx";
+import { observer } from "mobx-react";
 
-export default class Counter extends Component {
+class Counter extends Component {
   constructor(props) {
     super(props);
-    this.state = {
+
+    extendObservable(this, {
       value: '',
       sum: 0
-    };
+    });
   }
 
   handleSubmit = event => {
     event.preventDefault();
-    const sum = this.state.value + this.state.sum;
-    this.setState({
-      sum,
-      value: ''
-    });
+    const sum = this.value + this.sum;
+    this.sum = sum;
+    this.value = '';
   }
 
   handleChange = event => {
     const value = event.target.value;
     if (/(^$|\d+$)/.test(value)) {
-      this.setState({value: parseInt(value, 10) || ''});
+      this.value = parseInt(value, 10) || '';
     }
   }
 
   render () {
-    const { sum } = this.state;
+    const sum = this.sum;
 
     return (
       <div className="App">
@@ -36,7 +37,7 @@ export default class Counter extends Component {
             <input
               type="text"
               placeholder="Enter a number here"
-              value={this.state.value}
+              value={this.value}
               onChange={this.handleChange}
             />
           </label>
@@ -50,3 +51,5 @@ export default class Counter extends Component {
     );
   }
 }
+
+export default observer(Counter);

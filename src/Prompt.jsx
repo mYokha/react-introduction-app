@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
+import { extendObservable } from "mobx";
+import { observer } from "mobx-react";
 
-export default class Prompt extends Component {
+class Prompt extends Component {
   constructor (props) {
     super(props);
 
-    this.state = {
+    extendObservable(this, {
       value: ''
-    }
+    });
   }
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.populateCounters(this.state.value);
+    this.props.populateCounters(this.value);
   }
 
   handleChange = event => {
@@ -19,7 +21,7 @@ export default class Prompt extends Component {
 
     if (/(^$|\d+$)/.test(value)) {
       value = parseInt(value, 10) || '';
-      this.setState({value});
+      this.value = value;
     }
   }
 
@@ -31,7 +33,7 @@ export default class Prompt extends Component {
             <input
               type="text"
               placeholder="Amount of boxes"
-              value={this.state.value}
+              value={this.value}
               onChange={this.handleChange}
             />
           </label>
@@ -45,3 +47,5 @@ export default class Prompt extends Component {
     );
   }
 }
+
+export default observer(Prompt);
