@@ -3,7 +3,6 @@ import { extendObservable } from "mobx";
 import { observer } from "mobx-react";
 import Prompt from './Prompt';
 import Counter from './Counter';
-
 import './App.css';
 
 

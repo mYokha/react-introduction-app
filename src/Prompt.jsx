@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { extendObservable } from "mobx";
 import { observer } from "mobx-react";
+import PropTypes from 'prop-types';
 
 class Prompt extends Component {
   constructor (props) {
@@ -39,7 +40,7 @@ class Prompt extends Component {
           </label>
           <button
             type="submit"
-            >
+          >
             Create
           </button>
         </form>
@@ -49,3 +50,7 @@ class Prompt extends Component {
 }
 
 export default observer(Prompt);
+
+Prompt.propTypes = {
+  populateCounters: PropTypes.func.isRequired
+};

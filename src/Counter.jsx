@@ -3,7 +3,7 @@ import { extendObservable } from "mobx";
 import { observer } from "mobx-react";
 
 class Counter extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
 
     extendObservable(this, {
