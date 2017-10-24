@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
+import { extendObservable } from 'mobx';
+import { observer } from 'mobx-react';
 import Prompt from './Prompt';
 import Counter from './Counter';
-
 import './App.css';
 
 
-export default class App extends Component {
+class App extends Component {
   constructor (props) {
     super(props);
 
-    this.state = {
+    extendObservable(this, {
       prompt: true,
       counters: []
-    }
+    });
   }
 
   populateCounters = (quantity) => {
@@ -22,15 +23,14 @@ export default class App extends Component {
         id: 1000 + i
       });
     }
-    this.setState({
-      prompt: false,
-      counters
-    });
+
+    this.prompt = false;
+    this.counters = counters;
   }
 
   render () {
-    const counters = this.state.counters.length
-    ? this.state.counters.map(item => {
+    const counters = this.counters.length
+    ? this.counters.map(item => {
       return (
         <Counter
           key={item.id}
@@ -42,7 +42,7 @@ export default class App extends Component {
     return (
         <div>
           {
-            this.state.prompt &&
+            this.prompt &&
             <Prompt
               populateCounters={this.populateCounters}
             />
@@ -54,3 +54,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default observer(App);
