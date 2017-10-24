@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { extendObservable } from "mobx";
-import { observer } from "mobx-react";
+import { extendObservable } from 'mobx';
+import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 
 class Prompt extends Component {
