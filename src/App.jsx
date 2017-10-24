@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { extendObservable } from "mobx";
-import { observer } from "mobx-react";
+import { extendObservable } from 'mobx';
+import { observer } from 'mobx-react';
 import Prompt from './Prompt';
 import Counter from './Counter';
 import './App.css';
@@ -12,8 +12,9 @@ class App extends Component {
 
     extendObservable(this, {
       prompt: true,
-      counters: []});
-    }
+      counters: []
+    });
+  }
 
   populateCounters = (quantity) => {
     const counters = [];

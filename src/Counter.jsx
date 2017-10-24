@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { extendObservable } from "mobx";
-import { observer } from "mobx-react";
+import { extendObservable } from 'mobx';
+import { observer } from 'mobx-react';
 
 class Counter extends Component {
   constructor (props) {
@@ -14,8 +14,7 @@ class Counter extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    const sum = this.value + this.sum;
-    this.sum = sum;
+    this.sum += this.value;
     this.value = '';
   }
 

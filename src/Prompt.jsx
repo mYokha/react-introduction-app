@@ -19,10 +19,8 @@ class Prompt extends Component {
 
   handleChange = event => {
     let value = event.target.value;
-
     if (/(^$|\d+$)/.test(value)) {
-      value = parseInt(value, 10) || '';
-      this.value = value;
+      this.value = parseInt(value, 10) || '';
     }
   }
 
